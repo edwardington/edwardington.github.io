@@ -4,6 +4,7 @@ body, h1, h2, h3, p {
     padding: 0;
 }
 
+
 body {
     font-family: 'Open Sans', sans-serif;
     color: #333;
@@ -65,6 +66,27 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Adjusted and added styles */
+.profile-pic {
+    width: 300px; /* Adjusted size */
+    height: auto; /* Keeps the aspect ratio consistent */
+    display: block; /* To align it to center */
+    margin: 20px auto; /* Centered the image */
+    border-radius: 50%;
+}
+
+a {
+    color: #3498db; /* Gives links a distinct color */
+    text-decoration: none; /* Removes the underline from links */
+    transition: color 0.3s; /* Smooth color transition for hover effect */
+}
+
+a:hover {
+    color: #2c3e50; /* Darker color on hover */
+}
+
+
 
 /* Responsive styling for smaller screens */
 @media screen and (max-width: 768px) {
