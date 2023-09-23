@@ -67,6 +67,16 @@ footer {
     width: 100%;
 }
 
+.profile-section {
+    display: flex;
+    align-items: center;
+}
+
+.college-list {
+    margin-left: 20px;
+}
+
+
 /* Adjusted and added styles */
 .profile-pic {
     width: 300px; /* Adjusted size */
