@@ -5,17 +5,17 @@ body, h1, h2, h3, p {
     font-smoothing: antialiased;
 }
 
-
 body {
     font-family: 'Open Sans', sans-serif;
     color: #ffffff; /* White text */
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.5;
     background-color: #001f3f; /* Dark navy background */
     overflow-x: hidden;
 
-
 }
-
 
 a {
     color: #ffffff; 
@@ -35,13 +35,14 @@ h1, h2, h3 {
 header {
     background-color: #003366;
     color: #ffffff;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 nav {
     background-color: #003366; /* You can adjust this color if needed */
@@ -53,10 +54,25 @@ nav {
     list-style-type: none;
     padding: 10px 0;
     margin: 0;
+    flex-wrap: wrap; /* this will allow items to wrap to the next line on small screens */
 }
 
 .nav-list li {
     margin: 0 20px; /* Increased space for better legibility */
+}
+
+.intro {
+    padding: 10px;
+}
+
+/* Remove the breaks and handle the spacing with margin */
+.intro p {
+    margin-bottom: 1px;
+}
+
+.footer-nav {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .nav-list a {
@@ -159,8 +175,9 @@ main {
 
 .social-links {
     display: flex;
+    text-align: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .social-links a {
@@ -181,4 +198,29 @@ footer {
     padding: 40px 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    .nav-list li {
+        margin: 5px;
+    }
+
+    .intro {
+        padding: 10px;
+    }
+
+    .intro p {
+        margin-bottom: 15px;
+    }
+}
+
 
