@@ -124,13 +124,41 @@ main {
 }
 
 .parallax-section {
-    background: url('philly.jpg') center/cover no-repeat fixed;
-    height: 400px;
+    background: url('path_to_your_philly_image.jpg') center/cover no-repeat fixed;
+    height: 500px; /* Adjust as needed */
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-content {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.parallax-section::before {
+    content: "";
+    background: url('philly.jpg') center/cover no-repeat fixed;
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    z-index: -1;
+    will-change: transform;
+    transition: transform 0.5s ease;
+}
+
+/* Trigger the parallax effect on hover (Optional) */
+.parallax-section:hover::before {
+    transform: scale(1.1);
 }
 
 .fixed-cta {
