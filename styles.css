@@ -112,8 +112,8 @@ main {
 
 .service-card, .faq-item {
     background-color: #002b5e; /* A touch lighter than body color */
-    padding: 20px;
-    margin: 20px 0;
+    padding: 15px;
+    margin: 10px 0;
     border-radius: 10px;
     transition: box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -300,4 +300,34 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #004d9e;
+}
+
+.faq-toggle {
+    cursor: pointer;
+    background-color: #002b5e;
+    color: #ffffff; /* White text */
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    text-align: left;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.faq-toggle:hover {
+    background-color: #003d7a;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    padding: 0 15px;
+}
+
+.faq-item.active .faq-content {
+    max-height: 1000px; /* can adjust this based on your content size */
 }
