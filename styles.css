@@ -5,13 +5,17 @@ body, h1, h2, h3, p {
     font-smoothing: antialiased;
 }
 
+
 body {
     font-family: 'Open Sans', sans-serif;
     color: #ffffff; /* White text */
     line-height: 1.6;
     background-color: #001f3f; /* Dark navy background */
     overflow-x: hidden;
+
+
 }
+
 
 a {
     color: #ffffff; 
@@ -71,6 +75,26 @@ main {
     margin: 80px auto;
     padding: 0 20px;
     overflow: hidden;
+}
+
+.about-intro {
+    display: flex;
+    align-items: center; 
+    gap: 30px;
+}
+
+.about-intro .profile-section {
+    flex: 0 0 150px; 
+}
+
+.about-intro .profile-pic {
+    width: 100%; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid navy; 
+}
+
+.about-intro .profile-text {
+    flex: 1; 
 }
 
 .service-card, .faq-item {
@@ -157,3 +181,4 @@ footer {
     padding: 40px 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
+
