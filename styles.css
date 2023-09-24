@@ -6,6 +6,7 @@ body, h1, h2, h3, p {
 }
 
 body {
+    background-image: linear-gradient(135deg, #001f3f 0%, #003366 100%);
     font-family: 'Open Sans', sans-serif;
     color: #ffffff; /* White text */
     margin: 0;
@@ -35,7 +36,7 @@ h1, h2, h3 {
 header {
     background-color: #003366;
     color: #ffffff;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
     position: sticky;
     top: 0;
@@ -46,6 +47,7 @@ header {
 
 nav {
     background-color: #003366; /* You can adjust this color if needed */
+    padding-top: 20px; /* Increase padding-top for more space */
 }
 
 .nav-list {
@@ -83,7 +85,7 @@ nav {
 
 main {
     max-width: 1200px;
-    margin: 80px auto;
+    margin: 30px auto; /* Reduced from 80px */
     padding: 0 20px;
     overflow: hidden;
 }
@@ -187,11 +189,13 @@ main {
 }
 
 footer {
+    background-image: linear-gradient(135deg, #003366 0%, #001f3f 100%); /* add some flair */
     background-color: #003366; /* Consistency with header */
     color: #ffffff;
     text-align: center;
     padding: 40px 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+
 }
 
 
@@ -216,6 +220,84 @@ footer {
     .intro p {
         margin-bottom: 15px;
     }
+
+    .direct-contact li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .direct-contact li i {
+        margin-bottom: 5px;
+    }
 }
 
 
+.nav-list a:hover {
+    background-color: rgba(255, 107, 107, 0.1); /* Slight hover effect with the coral color */
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+.fixed-cta, .fixed-cta:hover {
+    background-color: var(--accent-color);
+    border: 2px solid white;
+}
+
+.contact-intro, .direct-contact, .contact-form {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #002b5e;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-intro p, .direct-contact h3 {
+    margin-bottom: 20px;
+}
+
+.direct-contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.direct-contact li {
+    margin-bottom: 10px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.direct-contact li i {
+    margin-right: 10px;
+    color: #007aff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="email"], textarea, input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input[type="submit"] {
+    background-color: #007aff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #004d9e;
+}
