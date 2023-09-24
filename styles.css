@@ -9,9 +9,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: #ffffff; /* White text */
     margin: 0;
-    padding: 0;
+    padding: 5px 0;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     background-color: #001f3f; /* Dark navy background */
     overflow-x: hidden;
 
@@ -35,7 +35,7 @@ h1, h2, h3 {
 header {
     background-color: #003366;
     color: #ffffff;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
     position: sticky;
     top: 0;
@@ -68,11 +68,6 @@ nav {
 /* Remove the breaks and handle the spacing with margin */
 .intro p {
     margin-bottom: 1px;
-}
-
-.footer-nav {
-    text-align: center;
-    margin-bottom: 10px;
 }
 
 .nav-list a {
@@ -203,7 +198,7 @@ footer {
 /* Adjustments for smaller screens */
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     header {
