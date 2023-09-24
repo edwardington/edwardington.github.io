@@ -122,17 +122,17 @@ main {
 .service-card:hover, .faq-item:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 .parallax-section {
-    background: url('path_to_your_philly_image.jpg') center/cover no-repeat fixed;
-    height: 500px; /* Adjust as needed */
+    background: none; /* Remove this since the image is already in ::before */
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 24px;
     position: relative;
-    overflow: hidden;
+    overflow: hidden;  
+    width: 100vw;  /* make it take up the entire viewport width */
 }
 
 .parallax-content {
@@ -145,12 +145,12 @@ main {
 
 .parallax-section::before {
     content: "";
-    background: url('philly.jpg') center/cover no-repeat fixed;
+    background: url('philly.jpg') center/cover no-repeat fixed; /* Use cover to ensure the image covers the entire section */
     position: absolute;
-    top: -25%;
-    left: -25%;
-    width: 150%;
-    height: 150%;
+    top: -10%;  /* Adjust the percentage for a more pronounced effect */
+    left: -10%;  /* Adjust the percentage for a more pronounced effect */
+    width: 120%; /* Adjust the width */
+    height: 120%; /* Add height so that it covers the entire area */
     z-index: -1;
     will-change: transform;
     transition: transform 0.5s ease;
@@ -158,7 +158,7 @@ main {
 
 /* Trigger the parallax effect on hover (Optional) */
 .parallax-section:hover::before {
-    transform: scale(1.1);
+    transform: scale(1.1);  /* Adjust the scaling for a more pronounced effect */
 }
 
 .fixed-cta {
