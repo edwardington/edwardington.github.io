@@ -252,6 +252,16 @@ footer {
     .direct-contact li i {
         margin-bottom: 5px;
     }
+
+            /* Adjust styles for mobile here */
+            .choice-btn {
+                display: block;
+                margin: 10px 0;
+            }
+            .vocab-quiz {
+                padding: 10px;
+            }
+            /* Add other mobile optimizations as needed */
 }
 
 
@@ -442,3 +452,125 @@ input[type="submit"]:hover {
     background-color: #e64a19; /* Darker shade on hover */
     text-decoration: none;
 }
+
+/*added September 26 - games */
+.vocab-quiz {
+    background-color: #f0f0f0;  /* Lighter gray */
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vocab-title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.instructions, #definition {  /* Explicit color for the definition */
+    font-size: 16px;
+    color: #444;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.choice-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fafafa; /* A near-white, but not pure white */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.choice-btn:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    margin-top: 20px;
+}
+
+.feedback, .timer, .score {
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.feedback {
+    color: #f00;
+}
+
+.timer {
+    color: #555;
+}
+
+.score {
+    font-weight: bold;
+}
+
+.start-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fafafa; /* A near-white, but not pure white */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.start-btn:hover {
+    background-color: #218838;
+}
+
+.banner {
+    display: none;
+    font-size: 24px;
+    color: white;
+    padding: 10px;
+    background-color: #2ecc71; /* green color for success */
+    border: 2px solid #27ae60; /* darker green border */
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.banner.show {
+    display: block;
+}
+
+#banner {
+    /* Your current styles */
+    display: none;
+}
+
+.progress-bar {
+    width: 100%; /* Full width of its parent container */
+    background-color: #e0e0e0; /* Light gray background */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Hide any overflow content (important for inner .progress-fill animation) */
+    height: 20px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #4CAF50; /* Green background */
+    width: 0; /* Initially set to zero, it will change with the progress of the quiz */
+    transition: width 1s ease-in-out; /* Smooth animation when width changes */
+}
+
+
+
+

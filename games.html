@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Games | Edward Wang | Tutor</title>
+</head>
+
+<body>
+    <header>
+        <h1><strong><a href="index.html">Edward Wang</a></strong></h1>
+        <h3>SAT, ACT, and College Admissions Tutor</h3>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="games.html" class="active">Games</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="vocab-quiz" >
+            <h1 class="vocab-title">Vocabulary Challenge</h1>
+            <p class="instructions">Guess the word that matches the definition. Score at least 3 out of 5 to win!</p>
+            
+            <button id="start-btn" onclick="startGame()" class="start-btn">Start Game</button>
+            <button id="reset-btn" onclick="resetGame()" style="display: none;">Reset Game</button>
+
+            <div class="game-content" style="display: none;">
+                <p id="definition">Loading...</p>
+                <div class="choices">
+                    <button onclick="checkAnswer(0)" id="choice0" class="choice-btn">Choice 1</button>
+                    <button onclick="checkAnswer(1)" id="choice1" class="choice-btn">Choice 2</button>
+                    <button onclick="checkAnswer(2)" id="choice2" class="choice-btn">Choice 3</button>
+                    <button onclick="checkAnswer(3)" id="choice3" class="choice-btn">Choice 4</button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="footer">
+                    <p id="feedback" class="feedback"></p>
+                    <p id="timer" class="timer"></p>
+                    <p id="score" class="score"></p>
+                </div>
+            </div>
+            <div id="banner" class="banner">You're a vocabulary master!</div>
+        </div>
+        
+    </main>
+
+<script>
+
+let currentQuestion = 0;
+let correctAnswerIndex = 0;
+let score = 0;
+let timer;
+
+
+let vocabulary = [
+{ word: "Auspicious", definition: "Conducive to success; favorable", choices: ["Auspicious", "Benevolent", "Cacophony", "Debacle"] },
+            { word: "Bellicose", definition: "Demonstrating aggression and willingness to fight", choices: ["Bellicose", "Ebullient", "Furtive", "Garrulous"] },
+            { word: "Debilitate", definition: "To make weak or feeble", choices: ["Debilitate", "Ebullient", "Furtive", "Garrulous"] },
+            { word: "Ebullient", definition: "Cheerful and full of energy", choices: ["Ebullient", "Gregarious", "Hapless", "Idiosyncrasy"] },
+            { word: "Furtive", definition: "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble", choices: ["Furtive", "Gregarious", "Hapless", "Idiosyncrasy"] },
+            { word: "Gregarious", definition: "Fond of company; sociable", choices: ["Gregarious", "Kowtow", "Lugubrious", "Munificent"] },
+            { word: "Hapless", definition: "Unfortunate or unlucky", choices: ["Hapless", "Ineffable", "Juxtapose", "Kaleidoscope"] },
+            { word: "Idiosyncrasy", definition: "A mode of behavior or way of thought peculiar to an individual", choices: ["Idiosyncrasy", "Kaleidoscope", "Lethargic", "Mellifluous"] },
+             { word: "Kaleidoscope", definition: "A constantly changing pattern or sequence of elements", choices: ["Kaleidoscope", "Lethargic", "Mellifluous", "Nebulous"] },
+            { word: "Lethargic", definition: "Affected by lethargy; sluggish and apathetic", choices: ["Lethargic", "Mellifluous", "Nebulous", "Obfuscate"] },
+            { word: "Mellifluous", definition: "Sweetly or smoothly flowing; pleasant to hear", choices: ["Mellifluous", "Nebulous", "Obfuscate", "Pernicious"] },
+            { word: "Nebulous", definition: "In the form of a cloud or haze; hazy", choices: ["Nebulous", "Obfuscate", "Pernicious", "Reverie"] },
+            { word: "Obfuscate", definition: "Render obscure, unclear, or unintelligible", choices: ["Obfuscate", "Pernicious", "Reverie", "Sycophant"] },
+            { word: "Pernicious", definition: "Having a harmful effect, especially in a gradual or subtle way", choices: ["Pernicious", "Reverie", "Sycophant", "Trepidation"] },
+            { word: "Reverie", definition: "A state of being pleasantly lost in one's thoughts; a daydream", choices: ["Reverie", "Sycophant", "Trepidation", "Ubiquitous"] },
+            { word: "Sycophant", definition: "A person who acts obsequiously towards someone important in order to gain advantage", choices: ["Sycophant", "Trepidation", "Ubiquitous", "Voracious"] },
+            { word: "Trepidation", definition: "A feeling of fear or agitation about something that may happen", choices: ["Trepidation", "Ubiquitous", "Voracious", "Whimsical"] },
+            { word: "Ubiquitous", definition: "Present, appearing, or found everywhere", choices: ["Ubiquitous", "Voracious", "Whimsical", "Xenophobe"] },
+            { word: "Voracious", definition: "Wanting or devouring great quantities of food; having a very eager approach to an activity", choices: ["Voracious", "Whimsical", "Xenophobe", "Yonder"] },
+            { word: "Whimsical", definition: "Playfully quaint or fanciful, especially in an appealing and amusing way", choices: ["Whimsical", "Xenophobe", "Yonder", "Zenith"] },
+            { word: "Xenophobe", definition: "A person unduly fearful or contemptuous of that which is foreign", choices: ["Xenophobe", "Yonder", "Zenith", "Zephyr"] },
+            { word: "Zephyr", definition: "A gentle, mild breeze", choices: ["Zephyr", "Zenith", "Auspicious", "Bellicose"] },
+            { word: "Abject", definition: "Of the most contemptible kind", choices: ["Abject", "Pulchritude", "Ineffable", "Equivocate"] },
+            { word: "Cacophony", definition: "Loud confusing disagreeable sounds", choices: ["Garrulous", "Cacophony", "Mellifluous", "Aplomb"] },
+            { word: "Ephemeral", definition: "Lasting a very short time", choices: ["Esoteric", "Ephemeral", "Eloquence", "Epitome"] },
+            { word: "Lugubrious", definition: "Excessively mournful", choices: ["Luminous", "Lugubrious", "Lethargic", "Latent"] },
+            { word: "Munificent", definition: "Very generous", choices: ["Munificent", "Mundane", "Malignant", "Mellifluous"] },
+            { word: "Nefarious", definition: "Wicked, villainous, criminal", choices: ["Nascent", "Nefarious", "Noxious", "Nominal"] },
+            { word: "Pernicious", definition: "Exceedingly harmful", choices: ["Pernicious", "Pervasive", "Petulant", "Placid"] },
+            { word: "Quixotic", definition: "Exceedingly idealistic; unrealistic and impractical", choices: ["Quantum", "Querulous", "Quixotic", "Quotidian"] },
+            { word: "Rancor", definition: "Feeling of deep and bitter anger and ill-will", choices: ["Rancor", "Rapacious", "Reclusive", "Redundant"] },
+            { word: "Sycophant", definition: "A person who tries to please someone to gain an advantage", choices: ["Sycophant", "Synergy", "Stoic", "Stringent"] },
+            { word: "Ubiquitous", definition: "Being present everywhere at once", choices: ["Ubiquitous", "Unilateral", "Umbra", "Uptight"] },
+            { word: "Voracious", definition: "Devouring or craving food in great quantities", choices: ["Voracious", "Vociferous", "Venal", "Vagrant"] },
+            { word: "Wistful", definition: "Full of yearning or desire tinged with melancholy", choices: ["Whimsical", "Wistful", "Wan", "Warranted"] },
+            { word: "Xenophobe", definition: "A person unduly fearful or contemptuous of that which is foreign", choices: ["Xerophyte", "Xenophobe", "Xerox", "Xenogenesis"] },
+            { word: "Yoke", definition: "To join, link, or unite together", choices: ["Yield", "Yarn", "Yoke", "Yawn"] },
+            { word: "Zephyr", definition: "A gentle, mild breeze", choices: ["Zenith", "Zephyr", "Zealot", "Zodiac"] },
+            { word: "Aberration", definition: "A departure from what is normal or expected", choices: ["Aberration", "Abstinence", "Abstract", "Abjure"] },
+            { word: "Belligerent", definition: "Hostile and aggressive", choices: ["Benevolent", "Benign", "Belligerent", "Bemoan"] },
+            { word: "Capitulate", definition: "To surrender or give up resistance", choices: ["Capitulate", "Capsize", "Cajole", "Carnage"] },
+            { word: "Debilitate", definition: "To make weak or feeble", choices: ["Decimate", "Debilitate", "Decipher", "Decry"] },
+            { word: "Enervate", definition: "To weaken or reduce in vitality", choices: ["Engage", "Enhance", "Enervate", "Enthrall"] },
+            { word: "Facetious", definition: "Treating serious issues with inappropriate humor", choices: ["Facetious", "Facilitate", "Faction", "Factitious"] },
+            { word: "Garrulous", definition: "Excessively talkative, especially on trivial matters", choices: ["Garrulous", "Gargantuan", "Galvanize", "Garner"] },
+             { word: "Ineffable", definition: "Too great to be expressed in words", choices: ["Inimical", "Ineffable", "Inculcate", "Incognito"] },
+            { word: "Juxtapose", definition: "To place or deal with close together for contrasting effect", choices: ["Juxtapose", "Jettison", "Jejune", "Jocose"] },
+            { word: "Kowtow", definition: "To act in an excessively subservient manner", choices: ["Knack", "Kowtow", "Knave", "Kaleidoscope"] }
+            // Add more vocabulary words here...
+        ];
+    // ...
+
+function startTimer() {
+    let timeLeft = 10; // 10 seconds per question
+    document.getElementById("timer").innerText = timeLeft;
+    timer = setInterval(function () {
+        timeLeft--;
+        document.getElementById("timer").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            document.getElementById("feedback").innerText = "Time's up! Next question.";
+            currentQuestion++;
+            setTimeout(loadQuestion, 2000);
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    clearInterval(timer);
+    startTimer();
+
+    document.getElementById("score").innerText = `Score: ${score}`; 
+
+    if (currentQuestion < 5) {
+        let question = vocabulary[currentQuestion];
+
+        // Display the definition
+        document.getElementById("definition").innerText = question.definition;
+
+        // Get randomized choices
+        const choices = getChoices(question);
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`choice${i}`).innerText = choices[i];
+            if (choices[i] === question.word) correctAnswerIndex = i;
+        }
+        
+    } else {
+        endGame();
+        return; 
+    }
+
+    for(let i = 0; i < 4; i++) {
+        document.getElementById(`choice${i}`).disabled = false;
+    }
+
+    document.getElementById("feedback").style.color = "black";
+    document.getElementById("score").style.color = "black"; 
+    document.getElementById("progressFill").style.width = (currentQuestion / 5) * 100 + "%"; // Update progress bar
+    currentQuestion++; // Increment currentQuestion after updating the progress bar
+}
+
+
+
+function resetGame() {
+    currentQuestion = 0;
+    score = 0;
+    shuffleArray(vocabulary);
+    document.querySelector(".game-content").style.display = "block";
+    document.getElementById("reset-btn").style.display = "none";
+    document.querySelector(".choices").style.display = "block";
+    loadQuestion();
+}
+
+
+function getChoices(question) {
+    let shuffledChoices = [...question.choices];
+    shuffleArray(shuffledChoices);
+    if (!shuffledChoices.includes(question.word)) {
+        shuffledChoices[Math.floor(Math.random() * 4)] = question.word;
+    }
+    return shuffledChoices;
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; 
+    }
+}
+
+function startGame() {
+    // Hide the banner
+     document.getElementById("banner").style.display = "none";
+
+    shuffleArray(vocabulary); // Shuffle the vocabulary at the beginning of the game
+    document.querySelector(".game-content").style.display = "block";
+    document.getElementById("start-btn").style.display = "none";
+    loadQuestion();
+}
+
+
+function endGame() {
+    clearInterval(timer);
+
+    // Update the progress bar to 100%
+    document.getElementById("progressFill").style.width = "100%";
+
+    // Display final score
+    let finalScore = `${score} / 5`;
+    let finalMessage = "";
+
+    switch (score) {
+        case 5:
+            finalMessage = "Incredible! You're a vocabulary master!";
+            // Show the banner
+            document.getElementById("banner").style.display = "block";
+            break;
+        case 4:
+            finalMessage = "Great job! You really know your words!";
+            break;
+        case 3:
+            finalMessage = "Good effort! Keep studying!";
+            break;
+        case 2:
+            finalMessage = "Not bad! But there's room for improvement!";
+            break;
+        case 1:
+            finalMessage = "A good start! But keep practicing!";
+            break;
+        default:
+            finalMessage = "Better luck next time!";
+            break;
+    }
+
+    document.getElementById("score").innerText = `Final Score: ${finalScore}`;
+    document.getElementById("definition").innerText = finalMessage;
+    for(let i = 0; i < 4; i++) {
+        document.getElementById(`choice${i}`).innerText = "";
+        document.getElementById(`choice${i}`).disabled = true;
+    }
+}
+
+
+function checkAnswer(choice) {
+    let feedbackElem = document.getElementById("feedback");
+    clearInterval(timer);
+    if (choice === correctAnswerIndex) {
+        document.getElementById("feedback").innerText = "Correct!";
+        score++;
+    } else {
+        document.getElementById("feedback").innerText = "Wrong. The correct answer is " + vocabulary[currentQuestion - 1].word;
+    }
+    setTimeout(loadQuestion, 2000); // Load the next question after 2 seconds
+     // Disable all choice buttons
+     for(let i = 0; i < 4; i++) {
+        document.getElementById(`choice${i}`).disabled = true;
+    }
+
+    if (choice === correctAnswerIndex) {
+        feedbackElem.style.color = "green";
+    } else {
+        feedbackElem.style.color = "red";
+    }
+}
+
+// Comment out the following line to stop the quiz from starting automatically
+// loadQuestion();
+
+</script>
+    
+</body>
+
+</html>
